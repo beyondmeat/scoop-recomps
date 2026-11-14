@@ -1,0 +1,35 @@
+{
+    "version": "5.4",
+    "description": "The Legend of Zelda: Link's Awakening for Windows, macOS, and Linux",
+    "homepage": "https://github.com/peiikai/LASRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/peiikai/LASRecomp/releases/download/beta_5.4/LAS.Recomp-beta_5.4-windows.zip",
+            "hash": "e1e268a886cf626d1af9886d225f92004f5369b977cfa8a551abdb5be68c9559",
+            "extract_dir": "LAS Recomp"
+        }
+    },
+    "shortcuts": [
+        [
+            "lasrecomp.exe",
+            "The Legend of Zelda - Link's Awakening"
+        ]
+    ],
+    "persist": "data",
+    "env_set": {
+        "LARECOMP_DATA_ROOT": "$persist_dir\\data"
+    },
+    "notes": "No game files are included. Follow the program instructions to install the game contents.",
+    "checkver": {
+        "github": "https://github.com/peiikai/LASRecomp",
+        "regex": "beta_([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/peiikai/LASRecomp/releases/download/beta_$version/LAS.Recomp-beta_$version-windows.zip"
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "version": "0.5.0",
+    "description": "God of War for Windows",
+    "homepage": "https://github.com/Vnnc1/gow-native-pc",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Vnnc1/gow-native-pc/releases/download/v0.5.0/gow-native-pc-windows.zip",
+            "hash": "6fcf93250efb10e2f5fec0214b3b7d07e5bd566fb0f38e15417e7c8d83659288",
+            "extract_dir": "gow-native-pc"
+        }
+    },
+    "shortcuts": [
+        [
+            "launcher/bin/gow-launcher.exe",
+            "God of War"
+        ]
+    ]
+}

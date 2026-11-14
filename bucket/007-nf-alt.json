@@ -1,0 +1,19 @@
+{
+    "version": "2",
+    "description": "007: Nightfire XBE recompilation for Windows",
+    "homepage": "https://github.com/TGP482/007Nightfire-XBERecomp",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/TGP482/007Nightfire-XBERecomp/releases/download/V2/007Nightfire-XBERecomp.zip",
+            "hash": "cb75d50bd974376102dec842e41d75898e82a84f78418fb5a7f62d253d2d401d"
+        }
+    },
+    "shortcuts": [
+        [
+            "nightfire.exe",
+            "James Bond 007 - Nightfire"
+        ]
+    ],
+    "persist": "assets"
+}

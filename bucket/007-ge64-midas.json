@@ -1,0 +1,34 @@
+{
+    "version": "1.0.2",
+    "description": "GoldenEye 007 N64-based PC port for Windows and Linux",
+    "homepage": "https://github.com/murkantor/Project-Midas",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/murkantor/Project-Midas/releases/download/1.0.2b/ProjectMidas-v1.0.2b-windows.zip",
+            "extract_dir": "ProjectMidas-v1.0.2b-windows",
+            "hash": "447b95c7f4947ad692fee9f4072509ecb055fc3cbe9862c7b5ca7a3ba555e16f"
+        }
+    },
+    "pre_install": "if (!(Test-Path \"$persist_dir\\midas.ini\") -and !(Test-Path \"$dir\\midas.ini\")) { New-Item -ItemType File \"$dir\\midas.ini\" | Out-Null }",
+    "shortcuts": [
+        [
+            "ProjectMidas.exe",
+            "GoldenEye 007"
+        ]
+    ],
+    "persist": [
+        "Data\\Devices",
+        "Data\\MatchSettings",
+        "midas.ini"
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/murkantor/Project-Midas/releases/download/$version/ProjectMidas-v$version-windows.zip",
+                "extract_dir": "ProjectMidas-v$version-windows"
+            }
+        }
+    }
+}

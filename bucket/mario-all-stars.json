@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "description": "Super Mario All-Stars for SNES and other platforms",
+    "homepage": "https://github.com/TanookiStudios/SuperMarioAllStarsRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/TanookiStudios/SuperMarioAllStarsRecomp/releases/download/v0.2.0/SuperMarioAllStars-Windows.zip",
+            "extract_dir": "SuperMarioAllStars-Windows"
+        }
+    },
+    "shortcuts": [
+        [
+            "SuperMarioAllStars.exe",
+            "Super Mario All-Stars"
+        ]
+    ],
+    "persist": [
+        "config.ini",
+        "keybinds.ini"
+    ],
+    "pre_install": "$files = @('config.ini', 'keybinds.ini'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/TanookiStudios/SuperMarioAllStarsRecomp/releases/download/v$version/SuperMarioAllStars-Windows.zip",
+                "extract_dir": "SuperMarioAllStars-Windows"
+            }
+        }
+    }
+}

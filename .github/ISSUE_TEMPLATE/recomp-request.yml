@@ -1,0 +1,85 @@
+name: 📦 Recomp Request
+description: Request a new recomp to be added to this bucket
+title: "[Request]: "
+labels: ["package-request"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Prerequisites
+      description: Please review before submitting
+      options:
+        - label: I have searched existing issues/requests to ensure this hasn't been requested before
+          required: true
+        - label: I have reviewed the [bucket criteria](../CONTRIBUTING.md#requirements-for-adding-a-new-recomp)
+          required: true
+
+  - type: checkboxes
+    attributes:
+      label: Bucket Criteria
+      description: This recomp must meet all criteria to be accepted
+      options:
+        - label: Reasonably well-known and widely used recomp
+          required: true
+        - label: English interface
+          required: true
+        - label: Actively developed with latest release less than 12 months old
+          required: true
+        - label: Freeware or open source (no shareware/trialware)
+          required: true
+
+  - type: input
+    attributes:
+      label: Recomp Name
+      description: Official name of the recomp
+      placeholder: e.g. Longshot, Ship of Harkinian, SpaceAnimals
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Game Name
+      description: Official name of the game being emulated
+      placeholder: e.g. Super Mario Galaxy, The Legend of Zelda - Ocarina of Time
+    validations:
+      required: true
+
+
+  - type: input
+    attributes:
+      label: Homepage / Repository
+      description: Official website or source repository
+      placeholder: https://longshot.magicbean.dev
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Latest Release URL
+      description: Link to the latest release download (preferably the portable version)
+      placeholder: https://longshot.magicbean.dev/download/launcher/nightly/windows-portable
+    validations:
+      required: false
+
+  - type: input
+    attributes:
+      label: Release Page
+      description: Link to releases page (helps identify download URL patterns)
+      placeholder: https://longshot.magicbean.dev/longshot/releases
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: Any other details that would help review this request
+      placeholder: Links to documentation, portable mode info, configuration details, etc.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        **Next Steps:**
+        - Maintainers will review the request within 1-2 weeks
+        - If approved, you may be asked to create the manifest (see [Contributing Guide](../CONTRIBUTING.md))
+        - If manifest is complex, maintainers can create it and you can submit a PR with improvements

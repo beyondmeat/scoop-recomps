@@ -1,0 +1,26 @@
+{
+    "version": "1.0.3",
+    "description": "Donkey Kong 64 for Windows and other platforms",
+    "homepage": "https://github.com/Rainchus/Donkey-Kong-64-Recompiled",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Rainchus/Donkey-Kong-64-Recompiled/releases/download/v1.0.3/DK64Recompiled-Windows-Release-1-0-3.zip",
+            "hash": "bfde3985365247f083ee47568b496eaf8a4a0845155a95802bc8f4a4871c60d5"
+        }
+    },
+    "shortcuts": [
+        [
+            "DK64Recompiled.exe",
+            "Donkey Kong 64"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Rainchus/Donkey-Kong-64-Recompiled/releases/download/v$version/DK64Recompiled-Windows-Release-1-0-3.zip"
+            }
+        }
+    }
+}

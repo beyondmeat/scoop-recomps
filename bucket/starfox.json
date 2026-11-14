@@ -1,0 +1,31 @@
+{
+    "version": "1.1.0",
+    "description": "Star Fox (Nintendo Switch 2) static recompilation for Windows",
+    "homepage": "https://github.com/SerenityG4K/SpaceAnimalsRecomp",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/SerenityG4K/SpaceAnimalsRecomp/releases/download/v1.1.0/SpaceAnimalsRecomp-1.1.0-windows.zip",
+            "hash": "84540c4e1edcc7f544981ba40357f423b1ac5c0870662c9c1c5964bfb9fa2814",
+            "extract_dir": "SpaceAnimalsRecomp-1.0.3"
+        }
+    },
+    "shortcuts": [
+        [
+            "lanceur.exe",
+            "StarFox"
+        ]
+    ],
+    "notes": "No game files are included. Follow the program instructions to install the game contents.",
+    "checkver": {
+        "github": "https://github.com/SerenityG4K/SpaceAnimalsRecomp",
+        "regex": "v([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/SerenityG4K/SpaceAnimalsRecomp/releases/download/v$version/SpaceAnimalsRecomp-$version-windows.zip"
+            }
+        }
+    }
+}

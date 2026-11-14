@@ -1,0 +1,31 @@
+{
+    "version": "0.1.2",
+    "description": "The Legend of Zelda: Breath of the Wild for Windows",
+    "homepage": "https://github.com/ryderclanky/BotW-Native",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/ryderclanky/BotW-Native/releases/download/v0.1.2/BotW-Native-v0.1.2-windows-x64.zip",
+            "extract_dir": "BotW-Native-v0.1.2"
+        }
+    },
+    "shortcuts": [
+        [
+            "BotWRecomp.exe",
+            "The Legend of Zelda - Breath of the Wild"
+        ]
+    ],
+    "persist": "user_data",
+    "env_set": {
+        "BOTW_USER_ROOT": "$persist_dir\\user_data"
+    },
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/ryderclanky/BotW-Native/releases/download/v$version/BotW-Native-v$version-windows-x64.zip",
+                "extract_dir": "BotW-Native-v0.1.2"
+            }
+        }
+    }
+}

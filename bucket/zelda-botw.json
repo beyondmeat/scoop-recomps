@@ -1,0 +1,37 @@
+{
+    "version": "0.5.3-alpha.5",
+    "description": "The Legend of Zelda: Breath of the Wild (SavageWind, work in progress)",
+    "homepage": "https://github.com/Revivedx/SavageWindRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Revivedx/SavageWindRecomp/releases/download/v0.5.3-alpha.5/SavageWind-0.5.3-alpha.5-windows.zip",
+            "hash": "667c4909a8ed72c002e5aa40a00d38720627eebf48b860beb5cd8805421f1285",
+            "extract_dir": "Savage Wind"
+        }
+    },
+    "shortcuts": [
+        [
+            "savagewind.exe",
+            "The Legend of Zelda - Breath of the Wild"
+        ]
+    ],
+    "persist": "data",
+    "env_set": {
+        "SAVAGEWIND_DATA_ROOT": "$persist_dir\\data"
+    },
+    "notes": "No game files are included. You must provide your own game files. This is an alpha release.",
+    "checkver": {
+        "url": "https://api.github.com/repos/Revivedx/SavageWindRecomp/releases?per_page=1",
+        "jsonpath": "$[0].tag_name",
+        "regex": "v([\\d.]+-alpha\\.\\d+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Revivedx/SavageWindRecomp/releases/download/v$version/SavageWind-$version-windows.zip",
+                "extract_dir": "Savage Wind"
+            }
+        }
+    }
+}

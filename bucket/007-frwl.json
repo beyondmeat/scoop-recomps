@@ -1,0 +1,19 @@
+{
+    "version": "2",
+    "description": "007: From Russia with Love for Windows",
+    "homepage": "https://github.com/TGP482/007FRWL-XBERecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/TGP482/007FRWL-XBERecomp/releases/download/V2/007FRWL-XBERecomp.zip",
+            "hash": "038482a48081eb554b008d06eed3bee4558392ac7217c05b9f8970e21e4e41d4"
+        }
+    },
+    "shortcuts": [
+        [
+            "007FRWL.exe",
+            "James Bond 007 - From Russia with Love"
+        ]
+    ],
+    "persist": "assets"
+}

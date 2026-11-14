@@ -1,0 +1,24 @@
+{
+    "version": "1.3.1",
+    "description": "007: Everything or Nothing for Windows",
+    "homepage": "https://github.com/hk21x/007eon-recomp",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/hk21x/007eon-recomp/releases/download/v1.3.1/EoN-USA-package.zip",
+            "hash": "677fd4ca03a13659961b6b6a8ca9cfaaa61f69f358df56cedbd04f01100550c9"
+        }
+    },
+    "shortcuts": [
+        [
+            "EoN.exe",
+            "James Bond 007 - Everything or Nothing"
+        ]
+    ],
+    "persist": [
+        "assets",
+        "hdd",
+        "settings.toml"
+    ],
+    "pre_install": "if (!(Test-Path \"$persist_dir\\settings.toml\") -and !(Test-Path \"$dir\\settings.toml\")) { New-Item -ItemType File \"$dir\\settings.toml\" | Out-Null }"
+}

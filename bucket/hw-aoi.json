@@ -1,0 +1,32 @@
+{
+    "version": "1.0.6",
+    "description": "Hyrule Warriors: Age of Imprisonment static recompilation for Windows",
+    "homepage": "https://github.com/LibertyPrime27/Hyrule-Warriors-AOI-Recomp-Optimized",
+    "license": "GPL-3.0-or-later",
+    "notes": [
+        "Bring your own matching game files.",
+        "The app runs in portable mode and stores data alongside the install."
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/LibertyPrime27/Hyrule-Warriors-AOI-Recomp-Optimized/releases/download/v1.0.6/Hyrule-Warriors-AOI-Recomp-Optimized-v1.0.6-win64.zip",
+            "hash": "8fe2e37e1a7c414d6f34cf44c33f43edec319c4f95f523299defe015c04d7d9b"
+        }
+    },
+    "extract_dir": "Hyrule-Warriors-AOI-Recomp-Optimized-v1.0.6",
+    "post_install": "Set-Content -Value $null -Path \"$dir\\portable.txt\"",
+    "shortcuts": [
+        [
+            "Hyrule Warriors AOI Recomp Optimized Compiler.exe",
+            "Hyrule Warriors - Age of Imprisonment"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/LibertyPrime27/Hyrule-Warriors-AOI-Recomp-Optimized/releases/download/v$version/Hyrule-Warriors-AOI-Recomp-Optimized-v$version-win64.zip"
+            }
+        }
+    }
+}

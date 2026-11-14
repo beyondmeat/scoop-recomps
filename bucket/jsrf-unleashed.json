@@ -1,0 +1,25 @@
+{
+    "version": "0.6.9",
+    "description": "Jet Set Radio Future: Unleashed for Windows",
+    "homepage": "https://github.com/JuMatt/JetSetRadioFuture-Unleashed",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/JuMatt/JetSetRadioFuture-Unleashed/releases/download/v0.6.9/JSRF-Unleashed-windows-x86_64.zip",
+            "hash": "02092c76c5fbdf6bbfcb6415db40188c23c19dd66b4b12e4e61bd7dcf798a2d9",
+            "extract_dir": "JSRF-Unleashed-windows-x86_64"
+        }
+    },
+    "shortcuts": [
+        [
+            "JSRF Unleashed.exe",
+            "Jet Set Radio Future"
+        ]
+    ],
+    "persist": [
+        "UDATA",
+        "settings",
+        "save"
+    ],
+    "pre_install": "Set-Content -Value $null -Path \"$dir\\portable.txt\""
+}

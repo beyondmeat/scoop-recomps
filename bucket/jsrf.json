@@ -1,0 +1,29 @@
+{
+    "version": "launcher-v2s",
+    "description": "Jet Set Radio Future launcher for Windows",
+    "homepage": "https://github.com/Miggas/JSRF-Recomp",
+    "license": "NOASSERTION",
+    "notes": [
+        "Bring your own game files. Place them in $persist_dir\\jsrf."
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/launcher-v2s/jsrf_launcher-windows.zip",
+            "hash": "1bf71ccdda68910b1344fa0540b46cabb31a7cbace5614aaf6e0bc2cc9c7596b"
+        }
+    },
+    "shortcuts": [
+        [
+            "jsrf_launcher.exe",
+            "Jet Set Radio Future"
+        ]
+    ],
+    "persist": [
+        "UDATA",
+        "TDATA",
+        "jsrf",
+        "launcher.ini",
+        "jsrf.ini"
+    ],
+    "pre_install": "if (!(Test-Path \"$persist_dir\\jsrf.ini\") -and !(Test-Path \"$dir\\jsrf.ini\")) { New-Item -ItemType File \"$dir\\jsrf.ini\" | Out-Null }"
+}

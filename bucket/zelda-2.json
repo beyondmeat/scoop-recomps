@@ -1,0 +1,27 @@
+{
+    "version": "0.6.0",
+    "description": "Zelda II: The Adventure of Link Rust reconstruction",
+    "homepage": "https://github.com/troyedwardsjr/z2rs",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/troyedwardsjr/z2rs/releases/download/v0.6.0/z2rs-0.6.0-x86_64-pc-windows-msvc.zip",
+            "extract_dir": "z2rs-0.6.0-x86_64-pc-windows-msvc"
+        }
+    },
+    "shortcuts": [
+        [
+            "z2rs.exe",
+            "Zelda II - The Adventure of Link"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/troyedwardsjr/z2rs/releases/download/v$version/z2rs-$version-x86_64-pc-windows-msvc.zip",
+                "extract_dir": "z2rs-0.6.0-x86_64-pc-windows-msvc"
+            }
+        }
+    }
+}

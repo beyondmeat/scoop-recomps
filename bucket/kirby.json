@@ -1,0 +1,30 @@
+{
+    "version": "0.3.0-alpha",
+    "description": "Kirby static recompilation (experimental)",
+    "homepage": "https://github.com/xtamqispeak/KirbyRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/xtamqispeak/KirbyRecomp/releases/download/v0.3.0-alpha/KirbyRecompSetup-v0.3.0-alpha.exe",
+            "hash": "fe73a2b0ef1f9d2e3893409cffe9b6ccc1dd4e38bc1df4bbbff51bbccf76dd68"
+        }
+    },
+    "shortcuts": [
+        [
+            "KirbyRecompSetup.exe",
+            "Kirby"
+        ]
+    ],
+    "pre_install": "Rename-Item -Path \"$dir\\KirbyRecompSetup-v$version.exe\" -NewName 'KirbyRecompSetup.exe'",
+    "checkver": {
+        "github": "https://github.com/xtamqispeak/KirbyRecomp",
+        "regex": "v([\\d.]+-[A-Za-z0-9.-]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/xtamqispeak/KirbyRecomp/releases/download/v$version/KirbyRecompSetup-v$version.exe"
+            }
+        }
+    }
+}

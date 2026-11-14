@@ -1,0 +1,466 @@
+on:
+  repository_dispatch:
+    types: [autofix-manifests]
+
+name: Auto-Fix Manifests
+
+permissions:
+  # auto-fix commits repaired manifests
+  contents: write
+  # required to dispatch a retry of Excavator after repairs
+  actions: write
+  # required to open/close tracking issues for unfixable manifests
+  issues: write
+
+# Ensure only one run per branch/workflow executes at a time. When a new run
+# is triggered (for example by a new push), any in-progress runs in the same
+# group will be cancelled so work is only performed against the latest commit.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  autofix:
+    name: Fix Broken Manifests
+    runs-on: windows-latest
+    if: github.event.client_payload.manifests_to_fix != ''
+    steps:
+      - name: Validate Excavator ref
+        id: validate-ref
+        shell: pwsh
+        env:
+          EXCAVATOR_REF: ${{ github.event.client_payload.excavator_ref }}
+        run: |
+          $ref = $env:EXCAVATOR_REF
+          if (-not $ref -or $ref -notmatch '^[A-Za-z0-9._/-]+$') {
+            throw "Refusing to check out invalid Excavator branch: $ref"
+          }
+          "ref=$ref" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ steps.validate-ref.outputs.ref }}
+
+      - name: Log trigger reason
+        shell: pwsh
+        run: |
+          $triggerEvent = "${{ github.event_name }}"
+          Write-Host "=== Auto-Fix Workflow Triggered ===" -ForegroundColor Cyan
+          Write-Host "Trigger: $triggerEvent" -ForegroundColor Gray
+
+      - name: Determine manifests to fix
+        id: parse-errors
+        shell: pwsh
+        env:
+          MANIFESTS: ${{ github.event.client_payload.manifests_to_fix }}
+          CHECKVER_MANIFESTS: ${{ github.event.client_payload.checkver_failed_apps }}
+        run: |
+          $bucketPath = Join-Path $env:GITHUB_WORKSPACE 'bucket'
+          $brokenManifests = @($env:MANIFESTS -split ',' | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Select-Object -Unique)
+          $checkverManifests = @($env:CHECKVER_MANIFESTS -split ',' | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Select-Object -Unique)
+          $validNames = @()
+          Get-ChildItem -Path $bucketPath -Filter '*.json' -File | ForEach-Object { $validNames += $_.BaseName }
+
+          if ($brokenManifests.Count -eq 0) {
+            throw 'No manifest names were provided; refusing to run an unscoped auto-fix.'
+          }
+          if (@($brokenManifests | Where-Object { $_ -notmatch '^[A-Za-z0-9._-]+$' }).Count -gt 0) {
+            throw 'Manifest list contains an invalid name.'
+          }
+          if (@($brokenManifests | Where-Object { $_ -notin $validNames }).Count -gt 0) {
+            throw "Manifest list contains an unknown manifest: $($brokenManifests -join ', ')"
+          }
+          if (@($checkverManifests | Where-Object { $_ -notin $brokenManifests }).Count -gt 0) {
+            throw 'Checkver failure list must be a subset of the failing manifest list.'
+          }
+
+          # A large batch likely indicates a systemic outage; do not make repair
+          # attempts against a broad set of manifests.
+          if ($brokenManifests.Count -gt 10) {
+            Write-Host "Found $($brokenManifests.Count) failures; skipping auto-fix as likely systemic." -ForegroundColor Yellow
+            "manifests-to-fix=" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding UTF8 -Append
+            "should-run=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding UTF8 -Append
+          } else {
+            Write-Host "Auto-fixing reported manifests: $($brokenManifests -join ', ')" -ForegroundColor Yellow
+            "manifests-to-fix=$($brokenManifests -join ',')" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding UTF8 -Append
+            "checkver-failed-apps=$($checkverManifests -join ',')" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding UTF8 -Append
+            "should-run=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding UTF8 -Append
+          }
+
+      - name: Cache Scoop
+        if: steps.parse-errors.outputs.should-run == 'true'
+        uses: actions/cache@v6
+        id: scoop-cache
+        with:
+          path: ~\scoop
+          key: ${{ runner.os }}-scoop-${{ hashFiles('.github/workflows/auto-fix.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-scoop-
+
+      - name: Install Scoop
+        if: steps.parse-errors.outputs.should-run == 'true' && steps.scoop-cache.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          # Install Scoop package manager
+          Write-Host "Installing Scoop..." -ForegroundColor Cyan
+
+          # Set Scoop environment variables
+          $env:SCOOP = "$env:USERPROFILE\scoop"
+          $env:SCOOP_HOME = "$env:SCOOP\apps\scoop\current"
+
+          # Download and install Scoop
+          iex (New-Object Net.WebClient).DownloadString('https://get.scoop.sh')
+
+          # Set environment variables for subsequent steps
+          "SCOOP=$env:SCOOP" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "SCOOP_HOME=$env:SCOOP_HOME" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+          Write-Host "Scoop installed successfully" -ForegroundColor Green
+
+      - name: Setup Scoop environment
+        if: steps.parse-errors.outputs.should-run == 'true'
+        shell: pwsh
+        run: |
+          # Ensure Scoop environment is set up
+          if ($env:SCOOP -eq $null) {
+            $env:SCOOP = "$env:USERPROFILE\scoop"
+          }
+          if ($env:SCOOP_HOME -eq $null) {
+            $env:SCOOP_HOME = "$env:SCOOP\apps\scoop\current"
+          }
+
+          # Ensure scoop is in PATH if not already
+          if ($env:PATH -notlike "*scoop*") {
+            $env:PATH = "$env:SCOOP\shims;$env:PATH"
+          }
+
+          # Set environment variables for subsequent steps
+          "SCOOP=$env:SCOOP" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "SCOOP_HOME=$env:SCOOP_HOME" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "$env:SCOOP\shims" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Install Dependencies
+        if: steps.parse-errors.outputs.should-run == 'true'
+        shell: pwsh
+        run: |
+          if (-not (Get-Command 7z -ErrorAction SilentlyContinue)) { scoop install 7zip }
+
+      - name: Repair known GitHub checkver patterns
+        if: steps.parse-errors.outputs.should-run == 'true' && steps.parse-errors.outputs.checkver-failed-apps != ''
+        shell: pwsh
+        env:
+          CHECKVER_FAILED_APPS: ${{ steps.parse-errors.outputs.checkver-failed-apps }}
+        run: |
+          $bucketPath = Join-Path $env:GITHUB_WORKSPACE 'bucket'
+          $scriptsPath = Join-Path $env:GITHUB_WORKSPACE 'bin'
+          . (Join-Path $scriptsPath 'lib-releasehelpers.ps1')
+          $failedApps = @($env:CHECKVER_FAILED_APPS -split ',' | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+
+          foreach ($app in $failedApps) {
+            $manifestPath = Join-Path $bucketPath "$app.json"
+            if (-not (Test-Path $manifestPath -PathType Leaf)) {
+              Write-Host "[SKIP] Manifest not found: $manifestPath" -ForegroundColor Yellow
+              continue
+            }
+
+            $originalJson = [System.IO.File]::ReadAllText($manifestPath)
+            try {
+              $manifest = ConvertFrom-Json -InputObject $originalJson -AsHashtable -ErrorAction Stop
+              $checkver = $manifest.checkver
+              $repository = $null
+              foreach ($candidate in @($checkver.github, $manifest.homepage, $checkver.url)) {
+                if ($candidate -and $candidate -match 'github\.com/(?:repos/)?(?<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)') {
+                  $repository = $matches['repo'] -replace '\.git$', ''
+                  break
+                }
+              }
+              if (-not $repository) { throw 'Could not determine the upstream GitHub repository from the manifest' }
+
+              $apiUrl = "https://api.github.com/repos/$repository/releases/latest"
+              $release = Invoke-RestMethod -Uri $apiUrl -Headers @{
+                'User-Agent' = 'scoop-recomps-autofix'
+                Accept = 'application/vnd.github+json'
+              } -ErrorAction Stop
+
+              $regex = if ($checkver.regex) { [string]$checkver.regex } elseif ($checkver.re) { [string]$checkver.re } else { $null }
+              $candidates = @()
+              if ($release.name) {
+                $candidates += [ordered]@{ source = [string]$release.name; jsonpath = '$.name' }
+              }
+              if ($release.tag_name) {
+                $candidates += [ordered]@{ source = [string]$release.tag_name; jsonpath = '$.tag_name' }
+              }
+              foreach ($asset in $release.assets) {
+                $escapedName = ([string]$asset.name).Replace('\', '\\').Replace("'", "\'")
+                $assetPath = "$.assets[?(@.name == '$escapedName')].browser_download_url"
+                if ($asset.browser_download_url) {
+                  $candidates += [ordered]@{ source = [string]$asset.browser_download_url; jsonpath = $assetPath }
+                }
+                if ($asset.name) {
+                  $candidates += [ordered]@{ source = [string]$asset.name; jsonpath = "$.assets[?(@.name == '$escapedName')].name" }
+                }
+              }
+
+              $repair = $null
+              $version = $null
+              if ($regex) {
+                foreach ($candidate in $candidates) {
+                  $match = [regex]::Match($candidate.source, $regex)
+                  if (-not $match.Success) { continue }
+
+                  $version = $match.Groups['1'].Value
+                  if ($checkver.replace) {
+                    $version = [regex]::Replace($match.Value, $regex, [string]$checkver.replace)
+                  }
+                  if (-not $version) { $version = $match.Groups['version'].Value }
+                  if (-not $version -or $version -notmatch '\d') { continue }
+
+                  $repair = [ordered]@{
+                    url = $apiUrl
+                    jsonpath = $candidate.jsonpath
+                    regex = $regex
+                  }
+                  if ($checkver.replace) { $repair.replace = [string]$checkver.replace }
+                  break
+                }
+              }
+
+              # If the old pattern no longer matches any field or asset, derive
+              # a new tag pattern from the release and the manifest's existing
+              # version layout. This preserves separators and versions such as
+              # "10.6" -> "beta_10_6" without package-specific rules.
+              if (-not $repair) {
+                if (-not $release.tag_name -or -not $manifest.version) {
+                  throw 'Could not derive a replacement pattern without a release tag and current version'
+                }
+
+                $tag = [string]$release.tag_name
+                $tagParts = [regex]::Matches($tag, '\d+')
+                $versionParts = [regex]::Matches([string]$manifest.version, '\d+')
+                if ($tagParts.Count -eq 0 -or $versionParts.Count -eq 0) {
+                  throw 'Release tag or current version has no numeric version components'
+                }
+
+                $tagDigits = ($tagParts | ForEach-Object { $_.Value }) -join ''
+                $versionDigits = ($versionParts | ForEach-Object { $_.Value }) -join ''
+                $captureValues = @()
+                if ($tagParts.Count -eq $versionParts.Count) {
+                  for ($i = 0; $i -lt $tagParts.Count; $i++) {
+                    if ($tagParts[$i].Value -ne $versionParts[$i].Value) {
+                      throw 'Release tag numeric components do not match the manifest version layout'
+                    }
+                    $captureValues += $tagParts[$i].Value
+                  }
+                } elseif ($tagParts.Count -eq 1 -and $tagDigits -eq $versionDigits) {
+                  foreach ($part in $versionParts) { $captureValues += $part.Value }
+                } else {
+                  throw 'Could not safely map release tag numbers to the existing manifest version'
+                }
+
+                $pattern = '^'
+                $replacement = [string]$manifest.version
+                $offset = 0
+                for ($i = 0; $i -lt $tagParts.Count; $i++) {
+                  $part = $tagParts[$i]
+                  $pattern += [regex]::Escape($tag.Substring($offset, $part.Index - $offset))
+                  if ($tagParts.Count -eq 1 -and $captureValues.Count -gt 1) {
+                    for ($captureIndex = 0; $captureIndex -lt $captureValues.Count; $captureIndex++) {
+                      $capture = $captureValues[$captureIndex]
+                      $pattern += "(?<v$captureIndex>\d{$($capture.Length)})"
+                    }
+                  } else {
+                    $pattern += "(?<v$i>\d{$($part.Length)})"
+                  }
+                  $offset = $part.Index + $part.Length
+                }
+                $pattern += [regex]::Escape($tag.Substring($offset)) + '$'
+
+                $versionParts = [regex]::Matches([string]$manifest.version, '\d+')
+                for ($i = $versionParts.Count - 1; $i -ge 0; $i--) {
+                  $part = $versionParts[$i]
+                  $replacement = $replacement.Remove($part.Index, $part.Length).Insert($part.Index, '${v' + $i + '}')
+                }
+                $match = [regex]::Match($tag, $pattern)
+                if (-not $match.Success) { throw 'Generated checkver pattern did not match the latest tag' }
+                $version = [regex]::Replace($tag, $pattern, $replacement)
+                if (-not $version -or $version -notmatch '\d') { throw "Derived version is invalid: $version" }
+
+                $repair = [ordered]@{
+                  url = $apiUrl
+                  jsonpath = '$.tag_name'
+                  regex = $pattern
+                  replace = $replacement
+                }
+              }
+
+              $manifest.checkver = $repair
+              $serialized = ConvertTo-Json -InputObject $manifest -Depth 100
+              $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+              [System.IO.File]::WriteAllText($manifestPath, $serialized + "`n", $utf8NoBom)
+              $formatScript = Join-Path $scriptsPath 'formatjson.ps1'
+              $formatOutput = & $formatScript -Dir $bucketPath -App $app 2>&1
+              if (-not $?) {
+                throw "Failed to format manifest '$manifestPath': $formatOutput"
+              }
+
+              $checkverResult = Invoke-PowerShellScript -Path (Join-Path $scriptsPath 'checkver.ps1') `
+                -ArgumentList @('-App', $app, '-Dir', $bucketPath)
+              $checkverOutput = $checkverResult.Output
+              if ($checkverResult.ExitCode -ne 0) {
+                throw "Scoop checkver exited with code $($checkverResult.ExitCode): $checkverOutput"
+              }
+              if ($checkverOutput -match '(?i)couldn''t (match|find|retrieve)|couldn''t parse') {
+                throw "Scoop checkver rejected the repaired configuration: $checkverOutput"
+              }
+              $versionPattern = '(?m)^\s*' + [regex]::Escape($app) + ':\s*\r?\n\s*' + [regex]::Escape($version) + '(?:\s+\(scoop version|\s+autoupdate available)?\s*$'
+              if ($checkverOutput -notmatch $versionPattern) {
+                throw "Scoop checkver did not return the expected version $version`: $checkverOutput"
+              }
+              Write-Host "[OK] Repaired checkver for $app (latest version: $version)" -ForegroundColor Green
+            } catch {
+              $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+              [System.IO.File]::WriteAllText($manifestPath, $originalJson, $utf8NoBom)
+              Write-Host "[WARN] Could not safely repair checkver for $app`: $($_.Exception.Message)" -ForegroundColor Yellow
+            }
+          }
+
+      - name: Auto-fix broken manifests
+        if: steps.parse-errors.outputs.should-run == 'true'
+        shell: pwsh
+        run: |
+          $bucketPath = "${{ github.workspace }}/bucket"
+          $scriptsPath = "${{ github.workspace }}/bin"
+          . (Join-Path $scriptsPath 'lib-releasehelpers.ps1')
+          $dryRun = "false"
+          $manifestsToFix = $env:MANIFESTS_TO_FIX
+
+          Write-Host "Starting auto-fix process..." -ForegroundColor Cyan
+          Write-Host "SCOOP_HOME: $env:SCOOP_HOME" -ForegroundColor Gray
+          Write-Host "SCOOP: $env:SCOOP" -ForegroundColor Gray
+
+          # Determine which manifests to process
+          $appNames = $manifestsToFix -split ','
+          $manifests = Get-ChildItem -Path $bucketPath -Filter "*.json" -File |
+            Where-Object { $appNames -contains $_.BaseName }
+
+          Write-Host "Found $($manifests.Count) manifests to check"
+
+          $fixedCount = 0
+          $upToDateCount = 0
+          $skipped = @()
+          foreach ($manifest in $manifests) {
+            Write-Host "`n[$(Get-Date -Format 'HH:mm:ss')] Processing $($manifest.BaseName)..."
+
+            $originalHash = (Get-FileHash -LiteralPath $manifest.FullName -Algorithm SHA256).Hash
+            $originalBytes = [System.IO.File]::ReadAllBytes($manifest.FullName)
+
+            # Run auto-fix script. -AutoCreateIssues opens one deduplicated
+            # tracking issue per unfixable manifest and closes it again once the
+            # manifest is healthy, so persistent breakage is visible without
+            # turning every hourly run red.
+            $autoFixResult = Invoke-PowerShellScript -Path (Join-Path $scriptsPath 'autofix-manifest.ps1') -ArgumentList @(
+              '-ManifestPath', $manifest.FullName,
+              '-BucketPath', $bucketPath,
+              '-AutoCreateIssues',
+              '-NotifyOnIssues',
+              '-IssueLog', "$env:RUNNER_TEMP\autofix-issues.jsonl",
+              '-GitHubToken', $env:GITHUB_TOKEN,
+              '-GitHubRepo', $env:GITHUB_REPOSITORY
+            )
+            if ($autoFixResult.Output) { Write-Host $autoFixResult.Output }
+            $exitCode = $autoFixResult.ExitCode
+            if ($exitCode -eq 0) {
+              $updatedHash = (Get-FileHash -LiteralPath $manifest.FullName -Algorithm SHA256).Hash
+              if ($updatedHash -ne $originalHash) {
+                Write-Host "[OK] Fixed: $($manifest.BaseName)" -ForegroundColor Green
+                $fixedCount++
+              } else {
+                Write-Host "[INFO] Already up to date: $($manifest.BaseName)" -ForegroundColor Cyan
+                $upToDateCount++
+              }
+            } else {
+              # autofix-manifest.ps1 exits non-zero when it cannot determine a safe
+              # fix (e.g. unparseable checkver, or a version that looks wrong and
+              # would corrupt the manifest). That is the script declining to act -
+              # not a CI failure. Record it and keep going.
+              [System.IO.File]::WriteAllBytes($manifest.FullName, $originalBytes)
+              Write-Host "[SKIP] $($manifest.BaseName) - no safe fix determined (exit $exitCode)" -ForegroundColor Yellow
+              $skipped += $manifest.BaseName
+            }
+          }
+
+          Write-Host "`n=== Auto-fix process complete ===" -ForegroundColor Cyan
+          Write-Host "Fixed: $fixedCount manifest(s)" -ForegroundColor Cyan
+          Write-Host "Already up to date: $upToDateCount manifest(s)" -ForegroundColor Cyan
+          Write-Host "Skipped: $($skipped.Count) manifest(s)" -ForegroundColor Cyan
+
+          # Surface the outcome in the run summary instead of via a red X
+          $summary = @()
+          $summary += "### Auto-fix results"
+          $summary += ""
+          $summary += "- Fixed: **$fixedCount**"
+          $summary += "- Already up to date: **$upToDateCount**"
+          $summary += "- Skipped (no safe fix): **$($skipped.Count)**"
+          if ($skipped.Count -gt 0) {
+            $summary += ""
+            $summary += "Manifests needing manual attention:"
+            $skipped | ForEach-Object { $summary += "- ``$_``" }
+          }
+          $summary -join "`n" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding UTF8 -Append
+
+          # Unfixable manifests are reported above, not treated as a build failure.
+          $global:LASTEXITCODE = 0
+          exit 0
+        env:
+          MANIFESTS_TO_FIX: ${{ steps.parse-errors.outputs.manifests-to-fix }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Commit and push changes
+        id: commit-fixes
+        if: steps.parse-errors.outputs.should-run == 'true'
+        shell: pwsh
+        run: |
+          git config user.name "Scoop Auto-Updater"
+          if ($LASTEXITCODE -ne 0) { throw "git config user.name failed" }
+          git config user.email "auto-updater@scoop.sh"
+          if ($LASTEXITCODE -ne 0) { throw "git config user.email failed" }
+          git add bucket/
+          if ($LASTEXITCODE -ne 0) { throw "git add failed" }
+
+          $status = git status --porcelain
+          if ($LASTEXITCODE -ne 0) { throw "git status failed" }
+          if ($status) {
+            Write-Host "Found changes to commit:" -ForegroundColor Green
+            Write-Host $status
+            git commit -m "chore: Auto-fix broken manifests"
+            if ($LASTEXITCODE -ne 0) { throw "git commit failed" }
+            git push
+            if ($LASTEXITCODE -ne 0) { throw "git push failed; manifest fixes were not persisted" }
+            "committed=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+            Write-Host "✓ Changes pushed" -ForegroundColor Green
+          } else {
+            "committed=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+            Write-Host "No manifest changes to commit" -ForegroundColor Gray
+          }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rerun Excavator after persisted fixes
+        if: steps.commit-fixes.outputs.committed == 'true'
+        uses: actions/github-script@v9
+        env:
+          EXCAVATOR_REF: ${{ steps.validate-ref.outputs.ref }}
+        with:
+          script: |
+            const ref = process.env.EXCAVATOR_REF;
+            if (!ref || !/^[A-Za-z0-9._/-]+$/.test(ref)) {
+              throw new Error(`Refusing to dispatch Excavator for invalid branch: ${ref}`);
+            }
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'excavator.yml',
+              ref,
+            });
+            console.log(`Dispatched Excavator on ${ref} after committing manifest fixes`);

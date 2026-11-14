@@ -1,0 +1,50 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+# Ensure CI runs cancel any in-progress runs for the same branch so only the
+# latest commit is tested.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (${{ matrix.shell }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - name: Checkout Bucket
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          path: "my_bucket"
+      - name: Checkout Scoop
+        uses: actions/checkout@v7
+        with:
+          repository: ScoopInstaller/Scoop
+          path: "scoop_core"
+      - name: Init and Test (PowerShell)
+        if: matrix.shell == 'powershell'
+        shell: powershell
+        run: |
+          $env:SCOOP_HOME="$(Convert-Path '.\scoop_core')"
+          .\scoop_core\test\bin\init.ps1
+          Install-Module -Name Pester -MinimumVersion 6.2.0 -Scope CurrentUser -Force -SkipPublisherCheck
+          Import-Module Pester -MinimumVersion 6.2.0 -Force
+          .\my_bucket\bin\test.ps1
+      - name: Init and Test (pwsh)
+        if: matrix.shell == 'pwsh'
+        shell: pwsh
+        run: |
+          $env:SCOOP_HOME="$(Convert-Path '.\scoop_core')"
+          .\scoop_core\test\bin\init.ps1
+          Install-Module -Name Pester -MinimumVersion 6.2.0 -Scope CurrentUser -Force -SkipPublisherCheck
+          Import-Module Pester -MinimumVersion 6.2.0 -Force
+          .\my_bucket\bin\test.ps1

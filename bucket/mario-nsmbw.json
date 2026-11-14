@@ -1,0 +1,33 @@
+{
+    "version": "0.2.2",
+    "description": "New Super Mario Bros. Wii static recompilation",
+    "homepage": "https://github.com/ral1009/NSMBWiicompiled",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/ral1009/NSMBWiicompiled/releases/download/v0.2.2/NSMBWCompiled-v0.2.2-32e8f44.zip",
+            "hash": "7d5c7cfefab69a3f6e6109664e3f9f1a4f1f0dda92db86da9566f79c411eccbc",
+            "extract_dir": "NSMBWCompiled"
+        }
+    },
+    "shortcuts": [
+        [
+            "NSMBWCompiled.exe",
+            "New Super Mario Bros. Wii"
+        ]
+    ],
+    "persist": [
+        "UserData",
+        "nsmbw_data"
+    ],
+    "pre_install": "Set-Content -Value $null -Path \"$dir\\portable.txt\"",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/ral1009/NSMBWiicompiled/releases/download/v$version/NSMBWCompiled-v$version-32e8f44.zip",
+                "extract_dir": "NSMBWCompiled"
+            }
+        }
+    }
+}

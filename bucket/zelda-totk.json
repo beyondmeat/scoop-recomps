@@ -1,0 +1,27 @@
+{
+    "version": "0.4.0",
+    "description": "The Legend of Zelda: Tears of the Kingdom for Windows and Linux",
+    "homepage": "https://github.com/valentderah/totk-pc-recomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/valentderah/totk-pc-recomp/releases/download/v0.4.0/TotK-Setup-0.4.0-windows.zip",
+            "extract_dir": "TotK-Setup-0.4.0-windows"
+        }
+    },
+    "shortcuts": [
+        [
+            "TotK-Setup.exe",
+            "The Legend of Zelda - Tears of the Kingdom"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/valentderah/totk-pc-recomp/releases/download/v$version/TotK-Setup-$version-windows.zip",
+                "extract_dir": "TotK-Setup-0.4.0-windows"
+            }
+        }
+    }
+}
