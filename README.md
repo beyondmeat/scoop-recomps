@@ -5,6 +5,8 @@
 
 # Recomps Scoop Bucket
 
+> Warning: This bucket is currently in beta. Recompilation projects can be unstable, and there is a possibility of data loss when updating a recomp if the Scoop persist directory is not configured correctly in the manifest.
+
 This is a [Scoop](https://scoop.sh) bucket for recomps. It's focused on Windows recomps.
 
 For other recomps, games, and other apps, check out [scoop-games](https://github.com/Calinou/scoop-games) or other scoop buckets.
