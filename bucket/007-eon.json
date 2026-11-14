@@ -18,6 +18,7 @@
     "persist": [
         "assets",
         "hdd",
+        "compiler",
         "settings.toml"
     ],
     "pre_install": "if (!(Test-Path \"$persist_dir\\settings.toml\") -and !(Test-Path \"$dir\\settings.toml\")) { New-Item -ItemType File \"$dir\\settings.toml\" | Out-Null }"

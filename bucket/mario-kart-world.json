@@ -19,8 +19,21 @@
     "persist": [
         "romfs",
         "exefs",
-        "profile"
+        "profile",
+        "lang",
+        "logs",
+        "mkw.ini",
+        "mkwgame.dll",
+        "mkwgame.dll.pdb",
+        "mkwgame.id",
+        "pipeline-cache.bin",
+        "pipeline-keys.bin",
+        "setup-state.json",
+        "setup-work",
+        "sm86",
+        "spirv"
     ],
+    "pre_install": "$files = @('mkw.ini', 'mkwgame.dll', 'mkwgame.dll.pdb', 'mkwgame.id', 'pipeline-cache.bin', 'pipeline-keys.bin', 'setup-state.json'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
     "notes": "No game files are included. Follow the program instructions to install the game contents.",
     "checkver": {
         "github": "https://github.com/adriadam10/mkw-recomp",
