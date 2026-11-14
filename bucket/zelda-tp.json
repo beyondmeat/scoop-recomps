@@ -9,11 +9,16 @@
             "hash": "ac63514eeb13cd4e9bd22be02dabee4952d1331a78f0496326bba2b577b12caf"
         }
     },
+    "pre_install": "if (!(Test-Path \"$dir\\data_location.json\")) { [IO.File]::WriteAllText(\"$dir\\data_location.json\", '{\"mode\":\"portable\",\"version\":1}') }",
     "shortcuts": [
         [
             "Dusklight.exe",
             "The Legend of Zelda - Twilight Princess"
         ]
+    ],
+    "persist": [
+        "data",
+        "mods"
     ],
     "checkver": "github",
     "autoupdate": {
