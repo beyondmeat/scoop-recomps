@@ -14,5 +14,13 @@
             "Takedawn-0.3.1-windows-x64-setup.exe",
             "Burnout 3 - Takedown"
         ]
-    ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/xenophobentx/takedawn/releases/download/v$version/Takedawn-$version-windows-x64-setup.exe"
+            }
+        }
+    }
 }

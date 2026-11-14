@@ -15,5 +15,20 @@
             "James Bond 007 - From Russia with Love"
         ]
     ],
-    "persist": "assets"
+    "persist": [
+        "assets",
+        "hdd",
+        "compiler"
+    ],
+    "checkver": {
+        "github": "https://github.com/TGP482/007FRWL-XBERecomp",
+        "regex": "V([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/TGP482/007FRWL-XBERecomp/releases/download/V$version/007FRWL-XBERecomp.zip"
+            }
+        }
+    }
 }

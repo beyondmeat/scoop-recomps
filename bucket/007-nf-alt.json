@@ -15,5 +15,16 @@
             "James Bond 007 - Nightfire"
         ]
     ],
-    "persist": "assets"
+    "persist": "assets",
+    "checkver": {
+        "github": "https://github.com/TGP482/007Nightfire-XBERecomp",
+        "regex": "V([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/TGP482/007Nightfire-XBERecomp/releases/download/V$version/007Nightfire-XBERecomp.zip"
+            }
+        }
+    }
 }

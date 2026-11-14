@@ -16,5 +16,13 @@
             "The World Is Not Enough"
         ]
     ],
-    "persist": "twine"
+    "persist": "twine",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/CipherNovaa/twine-pc/releases/download/v$version/twine-pc-v$version-windows-x86.zip"
+            }
+        }
+    }
 }

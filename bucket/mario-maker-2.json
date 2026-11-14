@@ -15,6 +15,7 @@
             "Super Mario Maker 2"
         ]
     ],
+    "persist": "mods",
     "checkver": "github",
     "autoupdate": {
         "architecture": {

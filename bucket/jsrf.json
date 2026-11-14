@@ -1,5 +1,5 @@
 {
-    "version": "launcher-v2s",
+    "version": "launcher-v2v",
     "description": "Jet Set Radio Future launcher for Windows",
     "homepage": "https://github.com/Miggas/JSRF-Recomp",
     "license": "NOASSERTION",
@@ -8,8 +8,8 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/launcher-v2s/jsrf_launcher-windows.zip",
-            "hash": "1bf71ccdda68910b1344fa0540b46cabb31a7cbace5614aaf6e0bc2cc9c7596b"
+            "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/launcher-v2v/jsrf_launcher-windows.zip",
+            "hash": "49d8c9f4c6bf4db8507d2c8cc60e106c2cf500006a245174ea372efad1fb8b3e"
         }
     },
     "shortcuts": [
@@ -25,5 +25,16 @@
         "launcher.ini",
         "jsrf.ini"
     ],
-    "pre_install": "if (!(Test-Path \"$persist_dir\\jsrf.ini\") -and !(Test-Path \"$dir\\jsrf.ini\")) { New-Item -ItemType File \"$dir\\jsrf.ini\" | Out-Null }"
+    "pre_install": "if (!(Test-Path \"$persist_dir\\jsrf.ini\") -and !(Test-Path \"$dir\\jsrf.ini\")) { New-Item -ItemType File \"$dir\\jsrf.ini\" | Out-Null }",
+    "checkver": {
+        "github": "https://github.com/Miggas/JSRF-Recomp",
+        "regex": "(?<version>launcher-v[\\d]+[a-z])"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/$version/jsrf_launcher-windows.zip"
+            }
+        }
+    }
 }

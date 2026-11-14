@@ -15,5 +15,14 @@
             "goldeneye007reloadedrecomp.exe",
             "GoldenEye 007 - Reloaded"
         ]
-    ]
+    ],
+    "persist": "assets",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/nikolaygorb/GoldenEye007ReloadedRecomp/releases/download/$version/GER-win64.zip"
+            }
+        }
+    }
 }

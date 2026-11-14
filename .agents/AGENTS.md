@@ -1,6 +1,7 @@
 # Agent guidance
 
 - Make focused changes, preserve unrelated work, and follow existing patterns.
+- Use Conventional Commits for commit messages, following the format and types documented in `CONTRIBUTING.md`.
 - Manifests belong in `bucket/` with lowercase kebab-case filenames and valid Scoop JSON. Include `license`; add `autoupdate` and `persist` only when supported by verified release and data paths. Do not guess URLs or paths.
 - Inspect archive contents before setting `bin`, `shortcuts`, or `extract_dir`. Shortcuts use `[relative executable path, human-readable title]`; omit platform tags.
 - When adding or removing a manifest, update its `README.md` catalog entry with accurate details.

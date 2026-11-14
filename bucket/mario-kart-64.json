@@ -14,5 +14,16 @@
             "MarioKart64Recompiled.exe",
             "Mario Kart 64"
         ]
-    ]
+    ],
+    "checkver": {
+        "url": "https://gitlab.com/api/v4/projects/sonicdcer%2FMarioKart64Recomp/releases/permalink/latest",
+        "regex": "\"tag_name\":\"v(?<version>[\\d.]+)\"[\\s\\S]*?MarioKart64Recompiled-v[\\d.]+-Windows-RelWithDebInfo[\\s\\S]*?package_files/(?<fileid>[\\d]+)/download"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://gitlab.com/sonicdcer/MarioKart64Recomp/-/package_files/$matchFileid/download#/MarioKart64Recompiled-v$version-Windows-RelWithDebInfo.zip"
+            }
+        }
+    }
 }

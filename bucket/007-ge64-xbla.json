@@ -1,12 +1,12 @@
 {
-    "version": "0.9.7a",
+    "version": "0.9.7c",
     "description": "GoldenEye 007 XBLA PC port",
     "homepage": "https://github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp",
     "license": "NOASSERTION",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp/releases/download/v0.9.7a/GoldenEye-007-XBLA-PC-Recomp-v0.9.7a.zip",
-            "hash": "2d3ba2ab3b59f88c49915d242c3a231940bf6dbdb545aeade93e4909c93ea5f8",
+            "url": "https://github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp/releases/download/v0.9.7c/GoldenEye-007-XBLA-PC-Recomp-v0.9.7c.zip",
+            "hash": "c7f2c57888b9d1488ca15a9c469249f5e5ef2aa799a54f655cd2f3505c4b90e6",
             "extract_dir": "GoldenEye 007"
         }
     },
@@ -19,5 +19,16 @@
     "persist": [
         "resources\\assets",
         "resources\\userdata"
-    ]
+    ],
+    "checkver": {
+        "url": "https://api.github.com/repos/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp/releases/latest",
+        "regex": "\"tag_name\":\"v(?<version>[\\d.]+[a-z]?)\""
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp/releases/download/v$version/GoldenEye-007-XBLA-PC-Recomp-v$version.zip"
+            }
+        }
+    }
 }

@@ -18,5 +18,13 @@
     "persist": [
         "game",
         "user_data"
-    ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/saulob/geometry-wars-retro-evolved-2-recompiled/releases/download/v$version/GeometryWarsRetroEvolved2-v$version-windows-x64.zip"
+            }
+        }
+    }
 }

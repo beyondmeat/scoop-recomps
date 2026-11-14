@@ -18,7 +18,14 @@
     "persist": [
         "assets",
         "hdd",
-        "settings.toml"
+        "compiler"
     ],
-    "pre_install": "if (!(Test-Path \"$persist_dir\\settings.toml\") -and !(Test-Path \"$dir\\settings.toml\")) { New-Item -ItemType File \"$dir\\settings.toml\" | Out-Null }"
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/hk21x/nightfire-recomp/releases/download/v$version/NightFire-package.zip"
+            }
+        }
+    }
 }

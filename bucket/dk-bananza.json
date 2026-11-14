@@ -16,5 +16,16 @@
             "Donkey Kong Bananza"
         ]
     ],
-    "notes": "No game files are included. The project is still early and may crash; follow the included instructions carefully."
+    "notes": "No game files are included. The project is still early and may crash; follow the included instructions carefully.",
+    "checkver": {
+        "url": "https://api.github.com/repos/Lucas-blip-png/dkb-pc-recomp/releases/latest",
+        "regex": "\"tag_name\":\"v(?<version>[\\d.]+)\"[\\s\\S]*?\"name\":\"DKB-Setup-[\\d.]+\\+(?<commit>[a-f0-9]+)-windows\\.zip\""
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Lucas-blip-png/dkb-pc-recomp/releases/download/v$version/DKB-Setup-$version+$matchCommit-windows.zip"
+            }
+        }
+    }
 }
