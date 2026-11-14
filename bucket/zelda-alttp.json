@@ -1,0 +1,32 @@
+{
+    "version": "0.6.6",
+    "description": "The Legend of Zelda: A Link to the Past for Super Nintendo",
+    "homepage": "https://github.com/mstan/ZeldaAlttPSNESRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/mstan/ZeldaAlttPSNESRecomp/releases/download/v0.6.6/ZeldaALttPSNESRecomp-windows-x64-v0.6.6.zip",
+            "hash": "53b613b86e87bfacc8462f485047c7fd22f82886dac69087aa0f0ef15eca7be2"
+        }
+    },
+    "shortcuts": [
+        [
+            "ZeldaALttPSNESRecomp.exe",
+            "The Legend of Zelda - A Link to the Past"
+        ]
+    ],
+    "persist": [
+        "config.ini",
+        "keybinds.ini",
+        "launcher-window.ini"
+    ],
+    "pre_install": "$files = @('config.ini', 'keybinds.ini', 'launcher-window.ini'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/mstan/ZeldaAlttPSNESRecomp/releases/download/v$version/ZeldaALttPSNESRecomp-windows-x64-v$version.zip"
+            }
+        }
+    }
+}

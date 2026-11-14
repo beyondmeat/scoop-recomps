@@ -1,0 +1,19 @@
+{
+    "version": "1.5",
+    "description": "GoldenEye 007: Reloaded for Windows",
+    "homepage": "https://github.com/nikolaygorb/GoldenEye007ReloadedRecomp",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/nikolaygorb/GoldenEye007ReloadedRecomp/releases/download/1.5/GER-win64.zip",
+            "hash": "be8a82e49b056652e96e59a08fe3ced7b0132173bbf1853b90397a1554e42851",
+            "extract_dir": "GER-win64"
+        }
+    },
+    "shortcuts": [
+        [
+            "goldeneye007reloadedrecomp.exe",
+            "GoldenEye 007 - Reloaded"
+        ]
+    ]
+}

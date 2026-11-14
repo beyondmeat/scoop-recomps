@@ -1,0 +1,35 @@
+on:
+  schedule:
+    # Run every hour to check for new versions
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+name: Excavator
+
+permissions:
+  contents: write
+
+jobs:
+  excavate:
+    name: Check for Updates
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Check for new versions
+        id: excavator
+        uses: ScoopInstaller/GithubActions@main
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKIP_UPDATED: "1"
+
+      - name: Record Excavator outcome for result processing
+        if: always()
+        shell: pwsh
+        env:
+          EXCAVATOR_OUTCOME: ${{ steps.excavator.outcome }}
+        run: |
+          Write-Host "AUTOFIX_EXCAVATOR_OUTCOME: $env:EXCAVATOR_OUTCOME"

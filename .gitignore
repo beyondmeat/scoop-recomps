@@ -1,0 +1,11 @@
+*~
+._*
+/checkver*
+.idea
+*.iml
+.vscode
+CLAUDE.md
+WARP.md
+.claude/
+
+autofix-checkver-report.json

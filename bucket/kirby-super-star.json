@@ -1,0 +1,24 @@
+{
+    "version": "Nightly",
+    "description": "Kirby Super Star Windows nightly build",
+    "homepage": "https://github.com/nvd123-YT/KirbySuperStarPC",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/nvd123-YT/KirbySuperStarPC/releases/download/Nightly/kirbysuperstar-Nightly-windows-x64.zip",
+            "hash": "3feea701d9e2095185674a8d21f99e533f2d2a004a94e8e05e495911264a32ea",
+            "extract_dir": "kirbysuperstar-Nightly-windows-x64"
+        }
+    },
+    "shortcuts": [
+        [
+            "KirbySuperStarSNESRecomp.exe",
+            "Kirby Super Star"
+        ]
+    ],
+    "persist": [
+        "config.ini",
+        "keybinds.ini"
+    ],
+    "pre_install": "$files = @('config.ini', 'keybinds.ini'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }"
+}

@@ -1,0 +1,19 @@
+{
+    "version": "3",
+    "description": "Tom Clancy's Splinter Cell: Double Agent for Windows",
+    "homepage": "https://github.com/TGP482/SCDA-XBERecomp",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/TGP482/SCDA-XBERecomp/releases/download/V3/SCDA-XBERecomp.zip",
+            "hash": "3f1bb078a2d9857ad0a29ed793c14a79b1fa747ca9420cccc828db591fa8416a"
+        }
+    },
+    "shortcuts": [
+        [
+            "SCDA.exe",
+            "Tom Clancy's Splinter Cell - Double Agent"
+        ]
+    ],
+    "persist": "assets"
+}

@@ -1,0 +1,19 @@
+{
+    "version": "0.2.4",
+    "description": "Grand Theft Auto: Vice City Stories for Windows",
+    "homepage": "https://github.com/gothamor/gta-vcs-recomp",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/gothamor/gta-vcs-recomp/releases/download/v0.2.4/VCS-Recomp-0.2.4-windows.zip",
+            "hash": "1215e8213e63f69b3fc6777468fcf5fac35c3e726ff320c73fbc1ad1d26203e4",
+            "extract_dir": "VCS-Recomp-0.2.4-windows"
+        }
+    },
+    "shortcuts": [
+        [
+            "VCSLauncher.exe",
+            "Grand Theft Auto - Vice City Stories"
+        ]
+    ]
+}

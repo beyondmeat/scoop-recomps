@@ -1,0 +1,25 @@
+{
+    "version": "0.1.10.1",
+    "description": "The Legend of Zelda: Tears of the Kingdom (Weeping of the Empire, Windows/Vulkan)",
+    "homepage": "https://github.com/daniel-madrid-07/weeping-of-the-empire",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/daniel-madrid-07/weeping-of-the-empire/releases/download/v0.1.10.1/Weeping-of-the-Empire-Setup-v0.1.10.1.exe"
+        }
+    },
+    "shortcuts": [
+        [
+            "Weeping-of-the-Empire-Setup-v0.1.10.1.exe",
+            "The Legend of Zelda - Tears of the Kingdom"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/daniel-madrid-07/weeping-of-the-empire/releases/download/v$version/Weeping-of-the-Empire-Setup-v$version.exe"
+            }
+        }
+    }
+}

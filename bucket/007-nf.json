@@ -1,0 +1,24 @@
+{
+    "version": "1.1.0",
+    "description": "007: Nightfire recompilation for Windows",
+    "homepage": "https://github.com/hk21x/nightfire-recomp",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/hk21x/nightfire-recomp/releases/download/v1.1.0/NightFire-package.zip",
+            "hash": "cdd3542df9ef3866e9681d391a0c9b6aa6dd874c922735d46f146440e54e1e6b"
+        }
+    },
+    "shortcuts": [
+        [
+            "Nightfire.exe",
+            "James Bond 007 - Nightfire"
+        ]
+    ],
+    "persist": [
+        "assets",
+        "hdd",
+        "settings.toml"
+    ],
+    "pre_install": "if (!(Test-Path \"$persist_dir\\settings.toml\") -and !(Test-Path \"$dir\\settings.toml\")) { New-Item -ItemType File \"$dir\\settings.toml\" | Out-Null }"
+}

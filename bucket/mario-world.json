@@ -1,0 +1,32 @@
+{
+    "version": "0.15.9",
+    "description": "Super Mario World for Super Nintendo",
+    "homepage": "https://github.com/mstan/SuperMarioWorldRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/mstan/SuperMarioWorldRecomp/releases/download/v0.15.9/SuperMarioWorldRecomp-windows-x64-v0.15.9.zip",
+            "hash": "8603cc1097348284215f09c1de644026dafb96ea4da7533bbdf5d3f02fc0ef82"
+        }
+    },
+    "shortcuts": [
+        [
+            "SuperMarioWorldSNESRecomp.exe",
+            "Super Mario World"
+        ]
+    ],
+    "persist": [
+        "config.ini",
+        "keybinds.ini",
+        "launcher-window.ini"
+    ],
+    "pre_install": "$files = @('config.ini', 'keybinds.ini', 'launcher-window.ini'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/mstan/SuperMarioWorldRecomp/releases/download/v$version/SuperMarioWorldRecomp-windows-x64-v$version.zip"
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "version": "0.5.1",
+    "description": "The Legend of Zelda: The Wind Waker HD recompilation",
+    "homepage": "https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp/releases/download/v0.5.1/WindWakerHD-v0.5.1-windows-x86_64.zip",
+            "extract_dir": "WindWakerHD-v0.5.1-windows-x86_64"
+        }
+    },
+    "shortcuts": [
+        [
+            "Wind Waker HD.exe",
+            "The Legend of Zelda - The Wind Waker HD"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/ZeldaWWHDRecomp/ZeldaWWHDRecomp/releases/download/v$version/WindWakerHD-v$version-windows-x86_64.zip",
+                "extract_dir": "WindWakerHD-v$version-windows-x86_64"
+            }
+        }
+    },
+    "persist": "data"
+}

@@ -1,0 +1,28 @@
+{
+    "version": "1.12.1",
+    "description": "The Legend of Zelda for NES",
+    "homepage": "https://github.com/mstan/LegendOfZeldaNESRecomp",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/mstan/LegendOfZeldaNESRecomp/releases/download/v1.12.1/LegendOfZeldaNESRecomp-USA-NTSC-cycle-mods-preview-windows-x64.zip",
+            "hash": "d48609acbe220c15eef8e770b6de4c037ba808c510ed0858ddd7f1c307648d34"
+        }
+    },
+    "shortcuts": [
+        [
+            "LegendOfZeldaNESRecomp.exe",
+            "The Legend of Zelda"
+        ]
+    ],
+    "persist": "config.ini",
+    "pre_install": "if (!(Test-Path \"$persist_dir\\config.ini\") -and !(Test-Path \"$dir\\config.ini\")) { New-Item -ItemType File \"$dir\\config.ini\" | Out-Null }",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/mstan/LegendOfZeldaNESRecomp/releases/download/v$version/LegendOfZeldaNESRecomp-USA-NTSC-cycle-mods-preview-windows-x64.zip"
+            }
+        }
+    }
+}

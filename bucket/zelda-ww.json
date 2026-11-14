@@ -1,0 +1,30 @@
+{
+    "version": "0.11.0",
+    "description": "The Legend of Zelda: The Wind Waker",
+    "homepage": "https://github.com/chrissotraidis/bluewake",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/chrissotraidis/bluewake/releases/download/v0.11.0/BlueWake-v0.11.0-windows-x64.zip",
+            "hash": "000e165cd780fdf3f17c8cc1359c0e2952f4ebcc18148d1d3134f1f73c5a7c24",
+            "extract_dir": "BlueWake"
+        }
+    },
+    "shortcuts": [
+        [
+            "BlueWake.exe",
+            "The Legend of Zelda - The Wind Waker"
+        ]
+    ],
+    "persist": "user",
+    "pre_install": "Set-Content -Value $null -Path \"$dir\\portable.txt\"",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/chrissotraidis/bluewake/releases/download/v$version/BlueWake-v$version-windows-x64.zip",
+                "extract_dir": "BlueWake"
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "version": "0.9.2",
+    "description": "Mario Kart 64 for Windows",
+    "homepage": "https://gitlab.com/sonicdcer/MarioKart64Recomp",
+    "license": "GPL-3.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://gitlab.com/sonicdcer/MarioKart64Recomp/-/package_files/333130840/download#/MarioKart64Recompiled-v0.9.2-Windows-RelWithDebInfo.zip",
+            "hash": "4b41226ad7d4c6012878194fa88fe1a83c1fa8f425dfbaa2a7ea87eb01c1c2b4"
+        }
+    },
+    "shortcuts": [
+        [
+            "MarioKart64Recompiled.exe",
+            "Mario Kart 64"
+        ]
+    ]
+}

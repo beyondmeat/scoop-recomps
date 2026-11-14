@@ -1,0 +1,18 @@
+{
+    "version": "0.3.1",
+    "description": "Takedawn installer for Windows",
+    "homepage": "https://github.com/xenophobentx/takedawn",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/xenophobentx/takedawn/releases/download/v0.3.1/Takedawn-0.3.1-windows-x64-setup.exe",
+            "hash": "5d571a9896be77defb96bc5a1e8552cf70eee83c91e907c6d852aaefcfa274cd"
+        }
+    },
+    "shortcuts": [
+        [
+            "Takedawn-0.3.1-windows-x64-setup.exe",
+            "Burnout 3 - Takedown"
+        ]
+    ]
+}

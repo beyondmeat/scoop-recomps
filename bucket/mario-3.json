@@ -1,0 +1,33 @@
+{
+    "version": "1.2.0",
+    "description": "Mushroom Recompiled Windows launcher and save-state build (experimental)",
+    "homepage": "https://github.com/Adoregabriel2005/mushroomrecompiled",
+    "license": "NOASSERTION",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Adoregabriel2005/mushroomrecompiled/releases/download/v1.2.0/MushroomRecompiled-v1.2.zip",
+            "hash": "d14fa9428fa510985ecb916b37d95e06a0896f2b20ce09efb5ed4a8f9c0e9a47",
+            "extract_dir": "SMB3-Recomp-v1.2"
+        }
+    },
+    "shortcuts": [
+        [
+            "SuperMarioBros3Recomp.exe",
+            "Super Mario Bros. 3"
+        ]
+    ],
+    "checkver": {
+        "url": "https://api.github.com/repos/Adoregabriel2005/mushroomrecompiled/releases/latest",
+        "jsonpath": "$.assets[?(@.name =~ /MushroomRecompiled-v[\\d.]+\\.zip$/)].browser_download_url",
+        "regex": "https://github.com/Adoregabriel2005/mushroomrecompiled/releases/download/v(?<version>[\\d.]+)/MushroomRecompiled-v(?<assetversion>[\\d.]+)\\.zip",
+        "replace": "${version}"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Adoregabriel2005/mushroomrecompiled/releases/download/v$version/MushroomRecompiled-v$matchAssetversion.zip",
+                "extract_dir": "SMB3-Recomp-v$matchAssetversion"
+            }
+        }
+    }
+}
