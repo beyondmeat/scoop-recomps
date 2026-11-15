@@ -1,12 +1,12 @@
 {
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "007: Agent Under Fire for Windows",
     "homepage": "https://github.com/hk21x/007-agentunderfire-recomp",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/hk21x/007-agentunderfire-recomp/releases/download/v1.0.2/AgentUnderFireLauncher.exe",
-            "hash": "5abdb648ff22457e8db4164f36a2e4917dd78b261d2b0ce2db85288f4039992e"
+            "url": "https://github.com/hk21x/007-agentunderfire-recomp/releases/download/v1.0.3/AgentUnderFireLauncher.exe",
+            "hash": "3bdbd0deebcb316fa3496a6d79da555725a8e7c2e95c68b4cbec56b9151dced2"
         }
     },
     "shortcuts": [
@@ -15,9 +15,7 @@
             "James Bond 007 - Agent Under Fire"
         ]
     ],
-    "persist": [
-        "AgentUnderFire"
-    ],
+    "persist": "AgentUnderFire",
     "checkver": "github",
     "autoupdate": {
         "architecture": {
