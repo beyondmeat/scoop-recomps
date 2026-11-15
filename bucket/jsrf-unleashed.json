@@ -21,7 +21,7 @@
         "settings",
         "save"
     ],
-    "pre_install": "Set-Content -Value $null -Path \"$dir\\portable.txt\"",
+    "pre_install": "Set-Content -Value $null -Path \"$dir\\portable.txt\"; Set-Content -Value $null -Path \"$dir\\settings\"",
     "checkver": "github",
     "autoupdate": {
         "architecture": {

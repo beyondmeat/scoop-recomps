@@ -28,7 +28,7 @@
     "pre_install": "if (!(Test-Path \"$persist_dir\\jsrf.ini\") -and !(Test-Path \"$dir\\jsrf.ini\")) { New-Item -ItemType File \"$dir\\jsrf.ini\" | Out-Null }",
     "checkver": {
         "github": "https://github.com/Miggas/JSRF-Recomp",
-        "regex": "(?<version>launcher-v[\\d]+[a-z])"
+        "regex": "(?<version>launcher-v[\\d]+[a-z]+)"
     },
     "autoupdate": {
         "architecture": {
