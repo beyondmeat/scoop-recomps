@@ -10,7 +10,7 @@
             "hash": "447b95c7f4947ad692fee9f4072509ecb055fc3cbe9862c7b5ca7a3ba555e16f"
         }
     },
-    "pre_install": "if (!(Test-Path \"$persist_dir\\midas.ini\") -and !(Test-Path \"$dir\\midas.ini\")) { New-Item -ItemType File \"$dir\\midas.ini\" | Out-Null }",
+    "pre_install": "if (!(Test-Path \"$persist_dir\\midas.ini\") -and !(Test-Path \"$dir\\midas.ini\")) { New-Item -ItemType File \"$dir\\midas.ini\" | Out-Null }; if (!(Test-Path \"$persist_dir\\gamecontrolleruser.txt\") -and !(Test-Path \"$dir\\gamecontrolleruser.txt\")) { New-Item -ItemType File \"$dir\\gamecontrolleruser.txt\" | Out-Null }",
     "shortcuts": [
         [
             "ProjectMidas.exe",
@@ -18,8 +18,9 @@
         ]
     ],
     "persist": [
-        "Data\\Devices",
-        "Data\\MatchSettings",
+        "Data",
+        "Mods",
+        "gamecontrolleruser.txt",
         "midas.ini"
     ],
     "checkver": "github",
