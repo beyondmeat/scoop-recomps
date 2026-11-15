@@ -56,6 +56,7 @@ Interested in adding something? To add a new recomp, please read the [Contributi
 | `mario-kart-64` | Mario Kart 64 for Windows | [gitlab.com/sonicdcer/MarioKart64Recomp](https://gitlab.com/sonicdcer/MarioKart64Recomp) |
 | `mario-kart-8-online` | Mario Kart 8 online project | [github.com/Vnnc1/MK8-online](https://github.com/Vnnc1/MK8-online) |
 | `mario-kart-world` | Mario Kart World PC recompilation | [github.com/adriadam10/mkw-recomp](https://github.com/adriadam10/mkw-recomp) |
+| `mario-kart-world-thwomp` | Mario Kart World PC recompilation with the THWOMP mod | [github.com/STS78721/MKW-THWOMP](https://github.com/STS78721/MKW-THWOMP) |
 | `mario-maker-2` | Super Mario Maker 2 recompilation | [github.com/smm2recomp/smm2recomp](https://github.com/smm2recomp/smm2recomp) |
 | `mario` | Super Mario Bros. for NES | [github.com/mstan/SuperMarioBrosNESRecomp](https://github.com/mstan/SuperMarioBrosNESRecomp) |
 | `mario-nsmbw` | New Super Mario Bros. Wii static recompilation | [github.com/ral1009/NSMBWiicompiled](https://github.com/ral1009/NSMBWiicompiled) |
