@@ -18,9 +18,13 @@
     ],
     "persist": [
         "config.ini",
-        "keybinds.ini"
+        "keybinds.ini",
+        "disc.cfg",
+        "build",
+        "source",
+        "recomp"
     ],
-    "pre_install": "$files = @('config.ini', 'keybinds.ini'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
+    "pre_install": "$files = @('config.ini','disc.cfg', 'keybinds.ini'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
     "checkver": {
         "url": "https://api.github.com/repos/nvd123-YT/KirbySuperStarPC/releases?per_page=1",
         "jsonpath": "$[0].tag_name"
