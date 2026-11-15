@@ -16,9 +16,7 @@
         ]
     ],
     "persist": [
-        "assets",
-        "hdd",
-        "compiler"
+        "AgentUnderFire"
     ],
     "checkver": "github",
     "autoupdate": {
