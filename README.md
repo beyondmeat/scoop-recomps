@@ -40,7 +40,7 @@ Interested in adding something? To add a new recomp, please read the [Contributi
 | `hw-aoi` | Hyrule Warriors: Age of Imprisonment static recompilation for Windows | [github.com/LibertyPrime27/Hyrule-Warriors-AOI-Recomp-Optimized](https://github.com/LibertyPrime27/Hyrule-Warriors-AOI-Recomp-Optimized) |
 | `gow` | God of War for Windows | [github.com/Vnnc1/gow-native-pc](https://github.com/Vnnc1/gow-native-pc) |
 | `007-ge64` | GoldenEye 007 N64-based PC port for Windows and Linux | [github.com/murkantor/Project-Midas](https://github.com/murkantor/Project-Midas) |
-| `007-ge64-reloaded` | GoldenEye 007: Reloaded for Windows | [github.com/nikolaygorb/GoldenEye007ReloadedRecomp](https://github.com/nikolaygorb/GoldenEye007ReloadedRecomp) |
+| `007-ge-reloaded` | GoldenEye 007: Reloaded for Windows | [github.com/nikolaygorb/GoldenEye007ReloadedRecomp](https://github.com/nikolaygorb/GoldenEye007ReloadedRecomp) |
 | `007-ge64-xbla-alt` | GoldenEye 007 XBLA PC port (alternative build) | [github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp](https://github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp) |
 | `007-ge64-xbla` | GoldenEye 007 XBLA PC port | [github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp](https://github.com/CaiusCodes/GoldenEye-007-XBLA-PC-Recomp) |
 | `007-ge64` | GoldenEye 007 PC port | [github.com/SunJaycy/GoldenEye-Recomp](https://github.com/SunJaycy/GoldenEye-Recomp) |
