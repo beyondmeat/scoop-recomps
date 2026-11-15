@@ -21,7 +21,7 @@
         "keybinds.ini",
         "disc.cfg",
         "build",
-        "source",
+        "src",
         "recomp"
     ],
     "pre_install": "$files = @('config.ini','disc.cfg', 'keybinds.ini'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
