@@ -1,12 +1,12 @@
 {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "007: Nightfire recompilation for Windows",
     "homepage": "https://github.com/hk21x/nightfire-recomp",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/hk21x/nightfire-recomp/releases/download/v1.1.0/NightFire-package.zip",
-            "hash": "cdd3542df9ef3866e9681d391a0c9b6aa6dd874c922735d46f146440e54e1e6b"
+            "url": "https://github.com/hk21x/nightfire-recomp/releases/download/v1.2.0/NightFire-package.zip",
+            "hash": "cf2fa88361d18e08e3df2de5e4fd26d5f3dd1cc1fa3cc1e0a02391aab7c108c8"
         }
     },
     "shortcuts": [
