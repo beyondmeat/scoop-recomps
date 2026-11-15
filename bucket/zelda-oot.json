@@ -1,12 +1,12 @@
 {
-    "version": "nightly-55-8acdd006",
+    "version": "nightly-57-a25cb80f",
     "description": "Legend of Zelda: Ocarina of Time Recompilation Longshot Launcher for Windows",
     "homepage": "https://longshot.magicbean.dev/",
     "license": "GPL-3.0",
     "architecture": {
         "64bit": {
-            "url": "https://longshot.magicbean.dev/download/launcher/nightly/windows-portable#/LongshotLauncher-nightly-55-8acdd006-windows-x64-portable.zip",
-            "hash": "8e86639cbd63c21460b62471d0dc107939411dd5562454c41788e41427ab5e34"
+            "url": "https://longshot.magicbean.dev/download/launcher/nightly/windows-portable#/LongshotLauncher-nightly-57-a25cb80f-windows-x64-portable.zip",
+            "hash": "f6450aa633020ecb5c4f5604a7fa030988e814aba5cc304338761291058774d2"
         }
     },
     "persist": "LongshotLauncher-data",
