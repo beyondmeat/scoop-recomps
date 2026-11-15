@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://longshot.magicbean.dev/download/launcher/nightly/windows-portable#/LongshotLauncher-v1.0.0-rc.4-windows-x64-portable.zip",
-            "hash": "dd712408b2306303ed15badcfb23be976d5af91a0584787e031f4817036ff7ef"
+            "hash": "3382079e6a13089005233e281d108226383e112c0b0fc3dc32ca15cb3940c6eb"
         }
     },
     "persist": "LongshotLauncher-data",
