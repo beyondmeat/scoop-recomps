@@ -16,7 +16,10 @@
             "GoldenEye 007 - Reloaded"
         ]
     ],
-    "persist": "assets",
+    "persist": [
+        "assets",
+        "settings"
+    ],
     "checkver": "github",
     "autoupdate": {
         "architecture": {
