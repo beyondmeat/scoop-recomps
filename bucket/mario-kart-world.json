@@ -36,8 +36,10 @@
     "pre_install": "$files = @('mkw.ini', 'mkwgame.dll', 'mkwgame.dll.pdb', 'mkwgame.id', 'pipeline-cache.bin', 'pipeline-keys.bin', 'setup-state.json'); foreach ($file in $files) { if (!(Test-Path \"$persist_dir\\$file\") -and !(Test-Path \"$dir\\$file\")) { New-Item -ItemType File \"$dir\\$file\" | Out-Null } }",
     "notes": "No game files are included. Follow the program instructions to install the game contents.",
     "checkver": {
-        "github": "https://github.com/adriadam10/mkw-recomp",
-        "regex": "/releases/tag/v(?<version>[\\d.]+)"
+        "url": "https://api.github.com/repos/adriadam10/mkw-recomp/releases/latest",
+        "jsonpath": "$.tag_name",
+        "regex": "^v(?<v0>\\d{1})\\.(?<v1>\\d{1})\\.(?<v2>\\d{2})$",
+        "replace": "${v0}.${v1}.${v2}"
     },
     "autoupdate": {
         "architecture": {

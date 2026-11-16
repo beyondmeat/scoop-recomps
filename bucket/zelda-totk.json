@@ -17,8 +17,10 @@
         ]
     ],
     "checkver": {
-        "github": "https://github.com/valentderah/totk-pc-recomp",
-        "regex": "/releases/tag/v(?<version>[\\d.]+)"
+        "url": "https://api.github.com/repos/valentderah/totk-pc-recomp/releases/latest",
+        "jsonpath": "$.tag_name",
+        "regex": "^v(?<v0>\\d{1})\\.(?<v1>\\d{1})\\.(?<v2>\\d{1})$",
+        "replace": "${v0}.${v1}.${v2}"
     },
     "autoupdate": {
         "architecture": {
