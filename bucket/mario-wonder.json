@@ -17,8 +17,8 @@
         ]
     ],
     "checkver": {
-        "github": "https://api.github.com/repos/vfjoo888/SuperWonders/releases/latest",
-        "regex": "v([\\d.]+)"
+        "github": "https://github.com/vfjoo888/SuperWonders",
+        "regex": "/releases/tag/v(?<version>[\\d.]+)"
     },
     "autoupdate": {
         "architecture": {

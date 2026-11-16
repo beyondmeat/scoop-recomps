@@ -26,9 +26,8 @@
     "pre_install": "if (!(Test-Path \"$persist_dir\\lanceur.ini\") -and !(Test-Path \"$dir\\lanceur.ini\")) { New-Item -ItemType File \"$dir\\lanceur.ini\" | Out-Null }",
     "notes": "No game files are included. Follow the program instructions to install the game contents.",
     "checkver": {
-        "url": "https://api.github.com/repos/SerenityG4K/SpaceAnimalsRecomp/releases/latest",
-        "jsonpath": "$.assets[?(@.name =~ /SpaceAnimalsRecomp-[\\d.]+-windows\\.zip$/)].browser_download_url",
-        "regex": "https://github.com/SerenityG4K/SpaceAnimalsRecomp/releases/download/v(?<version>[\\d.]+)/SpaceAnimalsRecomp-[\\d.]+-windows\\.zip"
+        "github": "https://github.com/SerenityG4K/SpaceAnimalsRecomp",
+        "regex": "/releases/tag/v(?<version>[\\d.]+)"
     },
     "autoupdate": {
         "architecture": {

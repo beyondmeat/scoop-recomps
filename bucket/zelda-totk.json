@@ -17,9 +17,8 @@
         ]
     ],
     "checkver": {
-        "url": "https://api.github.com/repos/valentderah/totk-pc-recomp/releases/latest",
-        "jsonpath": "$.assets[?(@.name =~ /TotK-Setup-[\\d.]+-windows\\.zip$/)].browser_download_url",
-        "regex": "https://github.com/valentderah/totk-pc-recomp/releases/download/v(?<version>[\\d.]+)/TotK-Setup-[\\d.]+-windows\\.zip"
+        "github": "https://github.com/valentderah/totk-pc-recomp",
+        "regex": "/releases/tag/v(?<version>[\\d.]+)"
     },
     "autoupdate": {
         "architecture": {

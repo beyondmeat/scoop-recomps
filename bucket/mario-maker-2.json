@@ -18,9 +18,8 @@
     ],
     "persist": "mods",
     "checkver": {
-        "url": "https://api.github.com/repos/smm2recomp/smm2recomp/releases/latest",
-        "jsonpath": "$.assets[?(@.name =~ /SMM2Recomp-windows-x86_64\\.zip$/)].browser_download_url",
-        "regex": "https://github.com/smm2recomp/smm2recomp/releases/download/v(?<version>[\\d.]+)/SMM2Recomp-windows-x86_64\\.zip"
+        "github": "https://github.com/smm2recomp/smm2recomp",
+        "regex": "/releases/tag/v(?<version>[\\d.]+)"
     },
     "autoupdate": {
         "architecture": {
