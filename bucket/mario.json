@@ -1,12 +1,12 @@
 {
-    "version": "1.12.9",
+    "version": "1.12.10",
     "description": "Super Mario Bros. for NES",
     "homepage": "https://github.com/mstan/SuperMarioBrosNESRecomp",
     "license": "NOASSERTION",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/mstan/SuperMarioBrosNESRecomp/releases/download/v1.12.9/SuperMarioBrosRecomp-windows-x64.zip",
-            "hash": "2ff5e21d2880bd549c67fa6e1101037e11553938dec3f5b556401a5afff74d65"
+            "url": "https://github.com/mstan/SuperMarioBrosNESRecomp/releases/download/v1.12.10/SuperMarioBrosRecomp-windows-x64.zip",
+            "hash": "55302631405ac8db95dee484a980698e4b16ae16a3132f1b61c0bb5e54494e3a"
         }
     },
     "pre_install": "if (!(Test-Path \"$persist_dir\\config.ini\") -and !(Test-Path \"$dir\\config.ini\")) { New-Item -ItemType File \"$dir\\config.ini\" | Out-Null }",
