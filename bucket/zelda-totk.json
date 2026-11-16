@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/valentderah/totk-pc-recomp/releases/download/v0.4.1/TotK-Setup-0.4.1-windows.zip",
-            "extract_dir": "TotK-Setup-0.4.0-windows",
+            "extract_dir": "TotK-Setup-0.4.1-windows",
             "hash": "5b1ebd4285167e80ec0a7ee2a5c0ec85540cbeea8c83234067a76f83f7a33ee8"
         }
     },
@@ -16,7 +16,11 @@
             "The Legend of Zelda - Tears of the Kingdom"
         ]
     ],
-    "checkver": "github",
+    "checkver": {
+        "url": "https://api.github.com/repos/valentderah/totk-pc-recomp/releases/latest",
+        "jsonpath": "$.assets[?(@.name =~ /TotK-Setup-[\\d.]+-windows\\.zip$/)].browser_download_url",
+        "regex": "https://github.com/valentderah/totk-pc-recomp/releases/download/v(?<version>[\\d.]+)/TotK-Setup-[\\d.]+-windows\\.zip"
+    },
     "autoupdate": {
         "architecture": {
             "64bit": {
