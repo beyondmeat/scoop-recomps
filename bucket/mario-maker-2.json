@@ -1,13 +1,13 @@
 {
-    "version": "0.7.15",
+    "version": "0.7.16",
     "description": "Super Mario Maker 2 recompilation",
     "homepage": "https://github.com/smm2recomp/smm2recomp",
     "license": "GPL-3.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/smm2recomp/smm2recomp/releases/download/v0.7.15/SMM2Recomp-windows-x86_64.zip",
+            "url": "https://github.com/smm2recomp/smm2recomp/releases/download/v0.7.16/SMM2Recomp-windows-x86_64.zip",
             "extract_dir": "SMM2Recomp-windows-x86_64",
-            "hash": "0d01712a30bfec90b414865d09b6ac2219940ebc52306d3e9865efcbf7c4187e"
+            "hash": "8b99bc9a5f7cc2975fac3caf40b99e9ace8b706a954f9251e3ecf85e000b5f98"
         }
     },
     "shortcuts": [
