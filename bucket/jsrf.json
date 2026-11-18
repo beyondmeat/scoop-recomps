@@ -1,5 +1,5 @@
 {
-    "version": "launcher-v2v",
+    "version": "3",
     "description": "Jet Set Radio Future launcher for Windows",
     "homepage": "https://github.com/Miggas/JSRF-Recomp",
     "license": "NOASSERTION",
@@ -8,8 +8,8 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/launcher-v2v/jsrf_launcher-windows.zip",
-            "hash": "49d8c9f4c6bf4db8507d2c8cc60e106c2cf500006a245174ea372efad1fb8b3e"
+            "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/launcher-v3/jsrf_launcher-windows.zip",
+            "hash": "5ad362c3df50df34c12a9b5c77c27d41e41ff0e4c2161f15bb9d775126fc68fd"
         }
     },
     "shortcuts": [
@@ -26,12 +26,12 @@
     ],
     "checkver": {
         "github": "https://github.com/Miggas/JSRF-Recomp",
-        "regex": "(?<version>launcher-v[\\d]+[a-z]+)"
+        "regex": "launcher-v(?<version>\\d+)"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/$version/jsrf_launcher-windows.zip"
+                "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/launcher-v$version/jsrf_launcher-windows.zip"
             }
         }
     }
