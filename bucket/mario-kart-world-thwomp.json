@@ -36,8 +36,8 @@
     "checkver": {
         "url": "https://api.github.com/repos/STS78721/MKW-THWOMP/releases/latest",
         "jsonpath": "$.tag_name",
-        "regex": "^(?<v0>\\d{1})\\.(?<v1>\\d{1})\\.(?<v2>\\d{1})b$",
-        "replace": "${v0}.${v1}.${v2}b"
+        "regex": "^(?<v0>\\d{1})\\.(?<v1>\\d{1})\\.(?<v2>\\d{1})$",
+        "replace": "${v0}.${v1}.${v2}"
     },
     "autoupdate": {
         "architecture": {
