@@ -3,9 +3,7 @@
     "description": "Jet Set Radio Future launcher for Windows",
     "homepage": "https://github.com/Miggas/JSRF-Recomp",
     "license": "NOASSERTION",
-    "notes": [
-        "Bring your own game files. Place them in $persist_dir\\jsrf."
-    ],
+    "notes": "Bring your own game files. Place them in $persist_dir\\jsrf.",
     "architecture": {
         "64bit": {
             "url": "https://github.com/Miggas/JSRF-Recomp/releases/download/launcher-v3/jsrf_launcher-windows.zip",
@@ -25,8 +23,10 @@
         "jsrf"
     ],
     "checkver": {
-        "github": "https://github.com/Miggas/JSRF-Recomp",
-        "regex": "launcher-v(?<version>\\d+)"
+        "url": "https://api.github.com/repos/Miggas/JSRF-Recomp/releases/latest",
+        "jsonpath": "$.tag_name",
+        "regex": "^launcher_v(?<v0>\\d{1})e$",
+        "replace": "${v0}"
     },
     "autoupdate": {
         "architecture": {
