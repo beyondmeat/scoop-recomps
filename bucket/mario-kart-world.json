@@ -1,12 +1,12 @@
 {
-    "version": "0.1.15",
+    "version": "0.1.16",
     "description": "Mario Kart World PC recompilation",
     "homepage": "https://github.com/adriadam10/mkw-recomp",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/adriadam10/mkw-recomp/releases/download/v0.1.15/mkw-recomp-0.1.15-windows-x64.zip",
-            "hash": "0d08f5cf0318c75309738eca027202a1e56b93532bbb8b9212ce2e1e8e9bdd2a",
+            "url": "https://github.com/adriadam10/mkw-recomp/releases/download/v0.1.16/mkw-recomp-0.1.16-windows-x64.zip",
+            "hash": "e5d26c2f03e88c3ec2ea351c00fb16fcd8b552b107de6a17c758c83864678288",
             "extract_dir": "mkw-recomp"
         }
     },
