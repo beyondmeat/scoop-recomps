@@ -1,13 +1,13 @@
 {
-    "version": "0.7.0",
+    "version": "0.7.1",
     "description": "Super Mario Bros. Wonder Windows build tool",
     "homepage": "https://github.com/vfjoo888/SuperWonders",
     "license": "MIT",
     "notes": "The builder does not include game files. Provide your own extracted ExeFS and RomFS folders.",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/vfjoo888/SuperWonders/releases/download/v0.7.0/SuperWonders-v0.7.0-Windows-x64.zip",
-            "hash": "4b0009806b023d4e07817c3e5c94b41739475f767ba5aad690eff32130128ceb"
+            "url": "https://github.com/vfjoo888/SuperWonders/releases/download/v0.7.1/SuperWonders-v0.7.1-Windows-x64.zip",
+            "hash": "983a66c9700f2855f42dee59cabe3c5a5f35bf8edeaa8c0ec672e49a38f9b13a"
         }
     },
     "shortcuts": [
