@@ -1,12 +1,12 @@
 {
-    "version": "0.5.0",
+    "version": "0.6.1",
     "description": "Mario Kart 8 online project",
     "homepage": "https://github.com/Vnnc1/MK8-online",
     "license": "GPL-3.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Vnnc1/MK8-online/releases/download/v0.5.0/MK8-online-0.5.0-setup.exe",
-            "hash": "433d5ff7173ec6e68d4cf01afa47adc186d2a938a6545e72effa4829a88430fe"
+            "url": "https://github.com/Vnnc1/MK8-online/releases/download/v0.6.1/MK8-online-0.6.1-setup.exe",
+            "hash": "d26a5fc9e1529c1394a67c831a56174a4336b5d43a64ff8aaa79f3768771b7e5"
         }
     },
     "shortcuts": [
