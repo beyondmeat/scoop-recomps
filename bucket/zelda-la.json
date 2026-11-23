@@ -23,8 +23,10 @@
     ],
     "persist": "data",
     "checkver": {
-        "github": "https://github.com/peiikai/LASRecomp",
-        "regex": "beta_([\\d.]+)"
+        "url": "https://api.github.com/repos/peiikai/LASRecomp/releases/latest",
+        "jsonpath": "$.tag_name",
+        "regex": "^v(?<v0>\\d{1})\\.(?<v1>\\d{1})\\.(?<v2>\\d{1})$",
+        "replace": "${v0}.${v1}.${v2}"
     },
     "autoupdate": {
         "architecture": {
