@@ -1,12 +1,12 @@
 {
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Mario Kart World PC recompilation with the THWOMP mod",
     "homepage": "https://github.com/STS78721/MKW-THWOMP",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/STS78721/MKW-THWOMP/releases/download/0.2.2/SteelTemple-MKW-THWOMP-0.2.2-Portable-StandAlone.zip",
-            "hash": "6eca8159ca4c0c27a21a431dfe2841b3fb259e56e9aab97a780aeb9793441b55"
+            "url": "https://github.com/STS78721/MKW-THWOMP/releases/download/0.2.3/SteelTemple-MKW-THWOMP-0.2.3-Portable-StandAlone.zip",
+            "hash": "cda8f17ba90e105a9db4e6b8a2812908100a518f54334d9606624d3996ee9d5a"
         }
     },
     "shortcuts": [
