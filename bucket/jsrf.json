@@ -25,7 +25,7 @@
     "checkver": {
         "url": "https://api.github.com/repos/Miggas/JSRF-Recomp/releases/latest",
         "jsonpath": "$.tag_name",
-        "regex": "^launcher-v(?<v0>\\d{1})g$",
+        "regex": "^launcher-v(?<v0>\\d{1})k$",
         "replace": "${v0}"
     },
     "autoupdate": {
