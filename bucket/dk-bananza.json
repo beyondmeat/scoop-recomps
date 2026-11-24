@@ -1,12 +1,12 @@
 {
-    "version": "0.5.1",
+    "version": "0.5.2",
     "description": "Donkey Kong Bananza for Windows (Vulkan)",
     "homepage": "https://github.com/Lucas-blip-png/dkb-pc-recomp",
     "license": "GPL-3.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Lucas-blip-png/dkb-pc-recomp/releases/download/v0.5.1/DKB-Setup-0.5.1+44ba6b1-windows.zip",
-            "hash": "7f70832c141e63ff3c3d060140e3d48bc503c51576457ae2ac51ee444886c73d",
+            "url": "https://github.com/Lucas-blip-png/dkb-pc-recomp/releases/download/v0.5.2/DKB-Setup-0.5.2+a58af05-windows.zip",
+            "hash": "28536fe035ee710a2d2a238c8249b37e43db8744a8140c0333bd508a2cb97fff",
             "extract_dir": "DKB-Setup"
         }
     },
