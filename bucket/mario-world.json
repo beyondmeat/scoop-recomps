@@ -1,12 +1,12 @@
 {
-    "version": "0.15.12",
+    "version": "0.15.13",
     "description": "Super Mario World for Super Nintendo",
     "homepage": "https://github.com/mstan/SuperMarioWorldRecomp",
     "license": "NOASSERTION",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/mstan/SuperMarioWorldRecomp/releases/download/v0.15.12/SuperMarioWorldRecomp-windows-x64-v0.15.12.zip",
-            "hash": "b9401334db0e512dcc55ac8e2237eb5db5859e882176b8d10705662f96736c0b"
+            "url": "https://github.com/mstan/SuperMarioWorldRecomp/releases/download/v0.15.13/SuperMarioWorldRecomp-windows-x64-v0.15.13.zip",
+            "hash": "79f15e445816862317f3220981f2dbaa2ceaeb64ba9f416e5596261eb1b0d4a2"
         }
     },
     "shortcuts": [
